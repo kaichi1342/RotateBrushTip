@@ -40,19 +40,14 @@ class Rotatebrushtip(Extension):
     
         action.triggered.connect(self.rotate_tip_right)
   
-        pass  
 
     def rotate_tip_left(self): 
         self.set_brushRotValue(5)  
-        
         self.reload() 
-        pass    
 
     def rotate_tip_right(self): 
         self.set_brushRotValue(-5)  
-
         self.reload() 
-        pass    
 
     def reload(self):  
         Krita.instance().action('toggle_brush_outline').trigger()
@@ -135,6 +130,7 @@ class Rotatebrushtip(Extension):
 
                 if spin_box.isVisibleTo(option_widget_container) and spin_box.metaObject().className() == 'KisAngleSelectorSpinBox' :   
                     curValue = spin_box.value() + rotationValue
+
                     if curValue >= 0 and curValue <= 360:
                         spin_box.setValue(curValue)
                     elif curValue < 0 : 
