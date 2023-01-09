@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ActionCollection version="2" name="Scripts">
+    <Actions category="Scripts">
+        <text>Rotate Brush Tip</text>
+
+
+        <Action name="pykrita_rotatebrushtip_left">
+          <text>Rotate Brush Tip Left</text>
+          <shortcut>F10</shortcut>
+          <isCheckable>false</isCheckable>
+        </Action>
+        <Action name="pykrita_rotatebrushtip_right">
+          <text>Rotate Brush Tip Right</text>
+          <shortcut>F11</shortcut>
+          <isCheckable>false</isCheckable>
+        </Action>
+
+
+    </Actions>
+</ActionCollection>
