@@ -67,7 +67,7 @@ class Rotatebrushtip(Extension):
 
     def get_brush_editor(self):
         for window in QApplication.topLevelWidgets():
-            if isinstance(window, QFrame) and window.objectName() == 'popup frame':
+            if isinstance(window, QFrame) and window.objectName() == 'KisPopupButtonFrame':
                 for widget, _ in self.walk_widgets(window):
                     real_cls_name = widget.metaObject().className()
                     obj_name = widget.objectName()
