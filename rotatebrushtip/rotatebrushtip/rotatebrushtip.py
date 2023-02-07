@@ -4,11 +4,16 @@ from krita import Extension
 import os
 
 EXTENSION_ID_L = 'pykrita_rotatebrushtip_left'
-EXTENSION_ID_R = 'pykrita_rotatebrushtip_right'
+EXTENSION_ID_R = 'pykrita_rotatebrushtip_right' 
+EXTENSION_ID_L10 = 'pykrita_rotatebrushtip_left_10'
+EXTENSION_ID_R10 = 'pykrita_rotatebrushtip_right_10'
 
 MENU_ENTRY_L = 'Rotate Brush Tip Left'
-MENU_ENTRY_R = 'Rotate Brush Tip Right'
+MENU_ENTRY_R = 'Rotate Brush Tip Right' 
+MENU_ENTRY_L10 = 'Rotate Brush Tip Left by 10°'
+MENU_ENTRY_R10 = 'Rotate Brush Tip Right by 10°'
 
+ANGLE = 1 
 
 from PyQt5.QtCore import (
         QItemSelectionModel,Qt,pyqtSignal)
@@ -32,22 +37,44 @@ class Rotatebrushtip(Extension):
         # parameter 1 = the name that Krita uses to identify the action
         # parameter 2 = the text to be added to the menu entry for this script
         # parameter 3 = location of menu entry
-        action = window.createAction(EXTENSION_ID_L, MENU_ENTRY_L, "tools/scripts")
-    
+        action = window.createAction(EXTENSION_ID_L, MENU_ENTRY_L, "tools/scripts") 
         action.triggered.connect(self.rotate_tip_left)
 
-        action = window.createAction(EXTENSION_ID_R, MENU_ENTRY_R, "tools/scripts")
-    
+        action = window.createAction(EXTENSION_ID_R, MENU_ENTRY_R, "tools/scripts") 
         action.triggered.connect(self.rotate_tip_right)
+        
+        action = window.createAction(EXTENSION_ID_L10, MENU_ENTRY_L10, "tools/scripts") 
+        action.triggered.connect(self.rotate_tip_left_10)
+
+        action = window.createAction(EXTENSION_ID_R10, MENU_ENTRY_R10, "tools/scripts") 
+        action.triggered.connect(self.rotate_tip_right_10)
   
+        pass  
 
     def rotate_tip_left(self): 
-        self.set_brushRotValue(5)  
+        self.set_brushRotValue(ANGLE)  
+        
         self.reload() 
+        pass    
 
     def rotate_tip_right(self): 
-        self.set_brushRotValue(-5)  
+        self.set_brushRotValue(-1 * ANGLE)  
+
         self.reload() 
+        pass    
+
+    def rotate_tip_left_10(self): 
+        self.set_brushRotValue(10)  
+        
+        self.reload() 
+        pass    
+
+    def rotate_tip_right_10(self): 
+        self.set_brushRotValue(-10)  
+
+        self.reload() 
+        pass    
+
 
     def reload(self):  
         Krita.instance().action('toggle_brush_outline').trigger()
@@ -67,7 +94,7 @@ class Rotatebrushtip(Extension):
 
     def get_brush_editor(self):
         for window in QApplication.topLevelWidgets():
-            if isinstance(window, QFrame) and window.objectName() == 'popup frame':
+            if isinstance(window, QFrame) and window.objectName() == 'popup frame' or window.objectName() == 'KisPopupButtonFrame':
                 for widget, _ in self.walk_widgets(window):
                     real_cls_name = widget.metaObject().className()
                     obj_name = widget.objectName()
@@ -130,7 +157,6 @@ class Rotatebrushtip(Extension):
 
                 if spin_box.isVisibleTo(option_widget_container) and spin_box.metaObject().className() == 'KisAngleSelectorSpinBox' :   
                     curValue = spin_box.value() + rotationValue
-
                     if curValue >= 0 and curValue <= 360:
                         spin_box.setValue(curValue)
                     elif curValue < 0 : 

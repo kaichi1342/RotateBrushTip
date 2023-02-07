@@ -16,5 +16,16 @@
         </Action>
 
 
+        <Action name="pykrita_rotatebrushtip_left_10">
+          <text>Rotate Brush Tip Left By 10</text>
+          <shortcut></shortcut>
+          <isCheckable>false</isCheckable>
+        </Action>
+        <Action name="pykrita_rotatebrushtip_right_10">
+          <text>Rotate Brush Tip Right By 10</text>
+          <shortcut></shortcut>
+          <isCheckable>false</isCheckable>
+        </Action>
+
     </Actions>
 </ActionCollection>
